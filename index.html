@@ -104,16 +104,17 @@
     .control-panel button:hover {
       background-color: #6f4e37;
     }
-    #rotatingSection {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .rotating-item {
-      background-color: rgba(30, 30, 30, 0.6);
-      padding: 15px;
+    #rotatingWrapper {
       border: 1px solid #a38b61;
       border-radius: 10px;
+      padding: 15px;
+      background-color: rgba(40, 40, 40, 0.6);
+    }
+    .rotating-item {
+      display: none;
+    }
+    .rotating-item.active {
+      display: block;
     }
   </style>
 </head>
@@ -124,7 +125,7 @@
   </div>
 
   <div class="overlay">
-    <!-- LEFT COLUMN: Core Info + DLCs -->
+    <!-- LEFT SIDE -->
     <div>
       <div class="section">
         <h2>Core Info</h2>
@@ -148,3 +149,75 @@
         <details>
           <summary>2nd DLC Reward</summary>
           <ul>
+            <li>💍 2 DLCs: Perm Ring — <span id="dlcRing" class="locked">Locked</span></li>
+            <li><label for="inputDlc2">Enter Ring</label><input type="text" id="inputDlc2" placeholder="Enter ring..."></li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="section">
+        <details>
+          <summary>3rd DLC Reward</summary>
+          <ul>
+            <li>⚔️ 3 DLCs: Perm Weapon — <span id="dlcWeapon" class="locked">Locked</span></li>
+            <li><label for="inputDlc3">Enter Weapon</label><input type="text" id="inputDlc3" placeholder="Enter weapon..."></li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Rotating Content -->
+    <div id="rotatingWrapper">
+      <div class="rotating-item active" id="baseGameReward">
+        <h2>Base Game Reward</h2>
+        <p>🏅 Covenant Item — <span id="covenantReward" class="locked">Locked</span></p>
+        <label for="inputBaseGameReward">Enter Covenant Item</label>
+        <input type="text" id="inputBaseGameReward" placeholder="Enter item..."/>
+      </div>
+
+      <div class="rotating-item" id="rotatingInfo">
+        <h2>Info</h2>
+        <p>Bosses grant 1 life each. Rewards unlock at key milestones.</p>
+        <p>DLC completions and base game status unlock permanent item use.</p>
+      </div>
+
+      <div class="rotating-item" id="unlockTrackerSection">
+        <h2>Unlock Tracker</h2>
+        <ul>
+          <li>Boss Kill = 1 life</li>
+          <li>4 Boss Kills = perm blacksmith key</li>
+          <li>8 Boss Kills = perm soldier key</li>
+          <li>12 Boss Kills = perm 3x lives per start</li>
+          <li>16 Boss Kills = x3 summons</li>
+          <li>20 Boss Kills = perm lockstones</li>
+          <li>24 Boss kills = perm summons available</li>
+          <li>28 Boss Kills = perm branches</li>
+          <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
+          <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
+          <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
+          <li>Beat base game = 1 perm covenant item of choice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const rotatingItems = [
+      document.getElementById('baseGameReward'),
+      document.getElementById('rotatingInfo'),
+      document.getElementById('unlockTrackerSection')
+    ];
+    let currentIndex = 0;
+
+    function rotateContent() {
+      rotatingItems.forEach((item, index) => {
+        item.classList.remove('active');
+        if (index === currentIndex) item.classList.add('active');
+      });
+      currentIndex = (currentIndex + 1) % rotatingItems.length;
+    }
+
+    setInterval(rotateContent, 10000);
+  </script>
+</body>
+</html>
