@@ -13,22 +13,22 @@
       font-family: 'Cinzel', serif;
       background-color: rgba(0, 0, 0, 1);
       color: #f0e6d2;
-      padding: 20px;
+      padding: 10px;
       font-size: 14px;
       font-weight: bold;
     }
     .overlay {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 10px;
       background-color: rgba(20, 20, 20, var(--bg-opacity));
       border: 2px solid #a38b61;
       border-radius: 20px;
-      padding: 20px;
-      width: 800px;
+      padding: 10px;
+      width: 750px;
     }
     .section {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     h2 {
       font-size: 20px;
@@ -109,7 +109,7 @@
       border: 1px solid #a38b61;
       border-radius: 10px;
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -180,7 +180,7 @@
       </div>
 
       <div class="section">
-        <h2>Info</h2>
+        <h2>Tips & Info</h2>
         <div id="rotatingInfo">Welcome to RogueMode!</div>
       </div>
 
@@ -290,11 +290,31 @@
     updateOverlay();
 
     const messages = [
-      "Remember: Every boss kill gives 1 life!",
-      "Defeat 4 bosses to unlock the Blacksmith Key!",
-      "Beat 16 bosses for x3 summons!",
-      "DLCs unlock permanent rewards!",
-      "Stay focused. Every life counts."
+      "🔁 Tip: Use lifegems sparingly early on.",
+      "📜 Reminder: 4 Boss Kills unlock the Blacksmith Key.",
+      "🧩 Fact: Branches are permanent after 28 bosses.",
+      "⚔️ Challenge: Go shieldless for the next boss.",
+      "🧙‍♂️ Pro Tip: Magic builds shine in early DLC.",
+      "🎯 Hint: Consider your pathing — Shaded Woods opens early.",
+      "🕯️ Don’t forget: Light all the Majula torches for fun!",
+      "🛡️ Tip: Medium armor provides great balance.",
+      "🎒 Reminder: Don’t hoard — use consumables!",
+      "🔥 Fact: Some enemies respawn endlessly.",
+      "🚪 Hint: Doors of Pharros can be tricky — use wisely.",
+      "🪓 Challenge: Use a non-upgraded weapon for a boss.",
+      "📦 Pro Tip: Keep a backup weapon to avoid breakage.",
+      "🏃‍♂️ Tip: Rolling > Blocking when low on stamina.",
+      "🎼 Reminder: Turn on in-game music — it’s atmospheric!",
+      "👣 Fact: Ring of Giants is great for poise stacking.",
+      "🧭 Hint: Check corners — items hide everywhere.",
+      "🪞 Challenge: No HUD for the next area.",
+      "🎭 Pro Tip: Masks have hidden bonuses.",
+      "🕸️ Tip: Status resist rings help vs Frigid Outskirts.",
+      "🍃 Reminder: Don’t skip Aldia’s dialog.",
+      "🪤 Fact: Gyrm’s traps can hit you too.",
+      "💣 Hint: Use firebombs to trigger oil barrels.",
+      "🎯 Challenge: Only kill bosses — pacifist run.",
+      "🧰 Pro Tip: Hidden walls reset with bonfires."
     ];
     let index = 0;
     setInterval(() => {
