@@ -184,24 +184,46 @@
         <div id="rotatingInfo">Welcome to RogueMode!</div>
       </div>
 
-      <div class="section">
-        <h2>Unlock Tracker</h2>
-        <ul id="unlockTracker">
-          <li>2 Boss Kills = 1 life</li>
-          <li>4 Boss Kills = perm blacksmith key</li>
-          <li>8 Boss Kills = perm soldier key</li>
-          <li>12 Boss Kills = perm 3 lives per character</li>
-          <li>16 Boss Kills = +3 summons in current run</li>
-          <li>20 Boss Kills = perm lockstones</li>
-          <li>24 Boss kills = perm summons available</li>
-          <li>28 Boss Kills = perm branches</li>
-          <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
-          <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
-          <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
-          <li>Beat base game = 1 perm covenant item of choice</li>
-        </ul>
-      </div>
-    </div>
+      div class="section">
+    <h2>Unlock Tracker</h2>
+    <ul id="unlockTracker">
+      <li>
+        <input type="checkbox" id="unlock1" disabled> 2 Boss Kills = 1 life
+      </li>
+      <li>
+        <input type="checkbox" id="unlock2"> 4 Boss Kills = perm blacksmith key
+      </li>
+      <li>
+        <input type="checkbox" id="unlock3"> 8 Boss Kills = perm soldier key
+      </li>
+      <li>
+        <input type="checkbox" id="unlock4"> 12 Boss Kills = perm 3 lives per character
+      </li>
+      <li>
+        <input type="checkbox" id="unlock5"> 16 Boss Kills = +3 summons in current run
+      </li>
+      <li>
+        <input type="checkbox" id="unlock6"> 20 Boss Kills = perm lockstones
+      </li>
+      <li>
+        <input type="checkbox" id="unlock7"> 24 Boss kills = perm summons available
+      </li>
+      <li>
+        <input type="checkbox" id="unlock8"> 28 Boss Kills = perm branches
+      </li>
+      <li>
+        <input type="checkbox" id="unlock9"> 1 DLC complete = 1 perm item of choice (no covenant)
+      </li>
+      <li>
+        <input type="checkbox" id="unlock10"> 2 DLC complete = 1 perm ring of choice (no covenant)
+      </li>
+      <li>
+        <input type="checkbox" id="unlock11"> 3 DLC complete = 1 perm weapon of choice (no covenant)
+      </li>
+      <li>
+        <input type="checkbox" id="unlock12"> Beat base game = 1 perm covenant item of choice
+      </li>
+    </ul>
   </div>
 
   <!-- Control Panel -->
@@ -249,6 +271,45 @@
       document.getElementById('covenantReward').textContent = document.getElementById('inputBaseGameReward').value || '--';
     }
 
+    function saveUnlocksToLocalStorage() {
+      const unlocks = {
+        unlock1: document.getElementById('unlock1').checked,
+        unlock2: document.getElementById('unlock2').checked,
+        unlock3: document.getElementById('unlock3').checked,
+        unlock4: document.getElementById('unlock4').checked,
+        unlock5: document.getElementById('unlock5').checked,
+        unlock6: document.getElementById('unlock6').checked,
+        unlock7: document.getElementById('unlock7').checked,
+        unlock8: document.getElementById('unlock8').checked,
+        unlock9: document.getElementById('unlock9').checked,
+        unlock10: document.getElementById('unlock10').checked,
+        unlock11: document.getElementById('unlock11').checked,
+        unlock12: document.getElementById('unlock12').checked
+        };
+        localStorage.setItem('ds2RogueUnlocks', JSON.stringify(unlocks));
+    }
+    
+    function loadUnlocksFromLocalStorage() {
+      const unlocks = JSON.parse(localStorage.getItem('ds2RogueUnlocks') || '{}');
+    if (unlocks) {
+        document.getElementById('unlock1').checked = unlocks.unlock1 || false;
+        document.getElementById('unlock2').checked = unlocks.unlock2 || false;
+        document.getElementById('unlock3').checked = unlocks.unlock3 || false;
+        document.getElementById('unlock4').checked = unlocks.unlock4 || false;
+        document.getElementById('unlock5').checked = unlocks.unlock5 || false;
+        document.getElementById('unlock6').checked = unlocks.unlock6 || false;
+        document.getElementById('unlock7').checked = unlocks.unlock7 || false;
+        document.getElementById('unlock8').checked = unlocks.unlock8 || false;
+        document.getElementById('unlock9').checked = unlocks.unlock9 || false;
+        document.getElementById('unlock10').checked = unlocks.unlock10 || false;
+        document.getElementById('unlock11').checked = unlocks.unlock11 || false;
+        document.getElementById('unlock12').checked = unlocks.unlock12 || false;
+      }
+    }
+
+    document.getElementById('unlockTracker').addEventListener('change', saveUnlocksToLocalStorage);
+    loadUnlocksFromLocalStorage();
+    
     function saveToLocalStorage() {
       const data = {
         lives: document.getElementById('updateLives').value,
