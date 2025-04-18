@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dark Souls 2 RogueMode Overlay</title>
   <style>
     :root {
@@ -19,13 +19,13 @@
     }
     .overlay {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 2fr;
       gap: 20px;
       background-color: rgba(20, 20, 20, var(--bg-opacity));
       border: 2px solid #a38b61;
       border-radius: 20px;
       padding: 20px;
-      width: 800px;
+      width: 375px;
     }
     .section {
       margin-bottom: 20px;
@@ -104,17 +104,6 @@
     .control-panel button:hover {
       background-color: #6f4e37;
     }
-    .rotate-container > div {
-      display: none;
-    }
-    .rotate-container > div.active {
-      display: block;
-      animation: fadeIn 1s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
   </style>
 </head>
 <body>
@@ -125,7 +114,6 @@
 
   <div class="overlay">
     <div>
-      <!-- Core Info Section -->
       <div class="section">
         <h2>Core Info</h2>
         <p><strong>Lives Remaining:</strong> <span id="lives">0</span></p>
@@ -134,7 +122,6 @@
         <p><strong>Game Status:</strong> <span id="gameStatus">Base Game Incomplete</span></p>
       </div>
 
-      <!-- DLC Rewards -->
       <div class="section">
         <details open>
           <summary>1st DLC Reward</summary>
@@ -173,41 +160,36 @@
           </ul>
         </details>
       </div>
-    </div>
 
-    <!-- Rotating Column -->
-    <div class="rotate-container">
-      <!-- Base Game Reward -->
-      <div class="section active">
-        <h2>Base Game Reward</h2>
-        <p>🏅 Covenant Item — <span id="covenantReward" class="locked">Locked</span></p>
-        <label for="inputBaseGameReward">Enter Covenant Item</label>
-        <input type="text" id="inputBaseGameReward" placeholder="Enter item...">
-      </div>
-
-      <!-- Rotating Info -->
-      <div class="section">
-        <h2>Info</h2>
-        <div id="rotatingInfo">Welcome to RogueMode!</div>
-      </div>
-
-      <!-- Unlock Tracker -->
-      <div class="section">
-        <h2>Unlock Tracker</h2>
-        <ul id="unlockTracker">
-          <li>Boss Kill = 1 life</li>
-          <li>4 Boss Kills = perm blacksmith key</li>
-          <li>8 Boss Kills = perm soldier key</li>
-          <li>12 Boss Kills = perm 3x lives per start</li>
-          <li>16 Boss Kills = x3 summons</li>
-          <li>20 Boss Kills = perm lockstones</li>
-          <li>24 Boss kills = perm summons available</li>
-          <li>28 Boss Kills = perm branches</li>
-          <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
-          <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
-          <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
-          <li>Beat base game = 1 perm covenant item of choice</li>
-        </ul>
+      <div class="section" id="rotatingSection">
+        <div id="rotate1">
+          <h2>Base Game Reward</h2>
+          <p>🏅 Covenant Item — <span id="covenantReward" class="locked">Locked</span></p>
+          <label for="inputBaseGameReward">Enter Covenant Item</label>
+          <input type="text" id="inputBaseGameReward" placeholder="Enter item...">
+        </div>
+        <div id="rotate2" style="display: none;">
+          <h2>Info</h2>
+          <p>Track your Dark Souls 2 RogueMode progress here!</p>
+          <p>Only updates when you click "Update Values".</p>
+        </div>
+        <div id="rotate3" style="display: none;">
+          <h2>Unlock Tracker</h2>
+          <ul>
+            <li>Boss Kill = 1 life</li>
+            <li>4 Boss Kills = perm blacksmith key</li>
+            <li>8 Boss Kills = perm soldier key</li>
+            <li>12 Boss Kills = perm 3x lives per start</li>
+            <li>16 Boss Kills = x3 summons</li>
+            <li>20 Boss Kills = perm lockstones</li>
+            <li>24 Boss kills = perm summons available</li>
+            <li>28 Boss Kills = perm branches</li>
+            <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
+            <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
+            <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
+            <li>Beat base game = 1 perm covenant item of choice</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -297,28 +279,16 @@
     loadFromLocalStorage();
     updateOverlay();
 
-    const messages = [
-      "Remember: Every boss kill gives 1 life!",
-      "Defeat 4 bosses to unlock the Blacksmith Key!",
-      "Beat 16 bosses for x3 summons!",
-      "DLCs unlock permanent rewards!",
-      "Stay focused. Every life counts."
-    ];
-    let infoIndex = 0;
-    setInterval(() => {
-      document.getElementById('rotatingInfo').textContent = messages[infoIndex];
-      infoIndex = (infoIndex + 1) % messages.length;
-    }, 10000);
-
-    // Rotate sections
-    const rotateSections = document.querySelectorAll('.rotate-container .section');
+    // Rotating logic for info panel
     let rotateIndex = 0;
+    const rotateElements = ["rotate1", "rotate2", "rotate3"];
+
     setInterval(() => {
-      rotateSections.forEach((el, i) => {
-        el.classList.toggle('active', i === rotateIndex);
+      rotateElements.forEach((id, i) => {
+        document.getElementById(id).style.display = i === rotateIndex ? 'block' : 'none';
       });
-      rotateIndex = (rotateIndex + 1) % rotateSections.length;
-    }, 15000);
+      rotateIndex = (rotateIndex + 1) % rotateElements.length;
+    }, 10000);
   </script>
 </body>
 </html>
