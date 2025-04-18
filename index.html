@@ -186,13 +186,15 @@
           <input type="text" id="inputBaseGameReward" placeholder="Enter item...">
         </div>
         <div>
-          <h2>Info</h2>
+          <h2>Tips & Reminders</h2>
           <ul>
-            <li>Boss Kill = 1 life</li>
-            <li>4 Boss Kills = perm blacksmith key</li>
-            <li>8 Boss Kills = perm soldier key</li>
-            <li>12 Boss Kills = perm 3x lives per start</li>
-            <li>16 Boss Kills = x3 summons</li>
+            <li>🔁 Tip: Use lifegems sparingly early on.</li>
+            <li>📜 Reminder: 4 Boss Kills unlock the Blacksmith Key.</li>
+            <li>🧩 Fact: Branches are permanent after 28 bosses.</li>
+            <li>⚔️ Challenge: Go shieldless for the next boss.</li>
+            <li>🧙‍♂️ Pro Tip: Magic builds shine in early DLC.</li>
+            <li>🎯 Hint: Consider your pathing — Shaded Woods opens early.</li>
+            <li>🕯️ Don’t forget: Light all the Majula torches for fun!</li>
           </ul>
         </div>
         <div>
@@ -210,95 +212,5 @@
       </div>
     </div>
   </div>
-
-  <div class="control-panel">
-    <h3>Live Update Panel</h3>
-    <label for="updateLives">Lives Remaining</label>
-    <input type="number" id="updateLives" min="0">
-    <label for="updateBosses">Bosses Defeated</label>
-    <input type="number" id="updateBosses" min="0">
-    <label for="updateDlcs">DLCs Completed</label>
-    <input type="number" id="updateDlcs" min="0">
-    <label for="updateBaseGame">Base Game Completion</label>
-    <input type="number" id="updateBaseGame" min="0">
-    <button id="updateButton">Update Values</button>
-    <button id="resetButton" style="margin-top: 10px;">Reset All</button>
-  </div>
-
-  <script>
-    document.getElementById('opacityRange').addEventListener('input', function () {
-      document.documentElement.style.setProperty('--bg-opacity', this.value);
-    });
-
-    function updateOverlay() {
-      const lives = document.getElementById('updateLives').value;
-      const bosses = document.getElementById('updateBosses').value;
-      const dlcs = document.getElementById('updateDlcs').value;
-      const baseGameCompletion = document.getElementById('updateBaseGame').value;
-
-      document.getElementById('lives').textContent = lives;
-      document.getElementById('bosses').textContent = bosses;
-      document.getElementById('dlcs').textContent = dlcs;
-      document.getElementById('gameStatus').textContent = (bosses >= 40) ? 'Base Game Completed' : 'Base Game Incomplete';
-
-      document.getElementById('dlcItem').textContent = document.getElementById('inputDlc1').value || '--';
-      document.getElementById('dlcRing').className = dlcs >= 2 ? 'unlocked' : 'locked';
-      document.getElementById('dlcWeapon').className = dlcs >= 3 ? 'unlocked' : 'locked';
-      document.getElementById('dlcRing').textContent = document.getElementById('inputDlc2').value || '--';
-      document.getElementById('dlcWeapon').textContent = document.getElementById('inputDlc3').value || '--';
-
-      document.getElementById('covenantReward').className = baseGameCompletion > 0 ? 'unlocked' : 'locked';
-      document.getElementById('covenantReward').textContent = document.getElementById('inputBaseGameReward').value || '--';
-    }
-
-    function saveToLocalStorage() {
-      const data = {
-        lives: document.getElementById('updateLives').value,
-        bosses: document.getElementById('updateBosses').value,
-        dlcs: document.getElementById('updateDlcs').value,
-        baseGame: document.getElementById('updateBaseGame').value,
-        item1: document.getElementById('inputDlc1').value,
-        item2: document.getElementById('inputDlc2').value,
-        item3: document.getElementById('inputDlc3').value,
-        covenant: document.getElementById('inputBaseGameReward').value,
-      };
-      localStorage.setItem('ds2RogueData', JSON.stringify(data));
-    }
-
-    function loadFromLocalStorage() {
-      const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
-      if (!data) return;
-      document.getElementById('updateLives').value = data.lives || 0;
-      document.getElementById('updateBosses').value = data.bosses || 0;
-      document.getElementById('updateDlcs').value = data.dlcs || 0;
-      document.getElementById('updateBaseGame').value = data.baseGame || 0;
-      document.getElementById('inputDlc1').value = data.item1 || '';
-      document.getElementById('inputDlc2').value = data.item2 || '';
-      document.getElementById('inputDlc3').value = data.item3 || '';
-      document.getElementById('inputBaseGameReward').value = data.covenant || '';
-    }
-
-    document.getElementById('updateButton').addEventListener('click', function () {
-      updateOverlay();
-      saveToLocalStorage();
-    });
-
-    document.getElementById('resetButton').addEventListener('click', function () {
-      localStorage.clear();
-      location.reload();
-    });
-
-    loadFromLocalStorage();
-    updateOverlay();
-
-    // Rotation logic
-    let currentIndex = 0;
-    const rotatingDivs = document.querySelectorAll('.rotating-content > div');
-    setInterval(() => {
-      rotatingDivs[currentIndex].classList.remove('active');
-      currentIndex = (currentIndex + 1) % rotatingDivs.length;
-      rotatingDivs[currentIndex].classList.add('active');
-    }, 10000);
-  </script>
 </body>
 </html>
