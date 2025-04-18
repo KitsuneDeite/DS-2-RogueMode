@@ -173,6 +173,11 @@
       </div>
 
       <div class="section">
+        <h2>Rotating Info</h2>
+        <p id="rotatingContent">Initializing...</p>
+      </div>
+
+      <div class="section">
         <h2>Unlock Tracker</h2>
         <ul id="unlockTracker">
           <li>Boss Kill = 1 life</li>
@@ -276,6 +281,28 @@
 
     loadFromLocalStorage();
     updateOverlay();
+
+    // Rotating Content Section
+    const messages = [
+      "🔁 Tip: Use lifegems sparingly early on.",
+      "📜 Reminder: 4 Boss Kills unlock the Blacksmith Key.",
+      "🧩 Fact: Branches are permanent after 28 bosses.",
+      "⚔️ Challenge: Go shieldless for the next boss.",
+      "🧙‍♂️ Pro Tip: Magic builds shine in early DLC.",
+      "🎯 Hint: Consider your pathing — Shaded Woods opens early.",
+      "🕯️ Don’t forget: Light all the Majula torches for fun!"
+    ];
+
+    let msgIndex = 0;
+    const rotator = document.getElementById("rotatingContent");
+
+    function rotateMessage() {
+      rotator.textContent = messages[msgIndex];
+      msgIndex = (msgIndex + 1) % messages.length;
+    }
+
+    rotateMessage();
+    setInterval(rotateMessage, 10000);
   </script>
 </body>
 </html>
