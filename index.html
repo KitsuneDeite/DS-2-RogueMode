@@ -253,5 +253,47 @@
 
     updateOverlay();
   </script>
+        function saveToLocalStorage() {
+  localStorage.setItem('ds2-lives', document.getElementById('updateLives').value);
+  localStorage.setItem('ds2-bosses', document.getElementById('updateBosses').value);
+  localStorage.setItem('ds2-dlcs', document.getElementById('updateDlcs').value);
+  localStorage.setItem('ds2-baseGame', document.getElementById('updateBaseGame').value);
+  localStorage.setItem('ds2-dlc1', document.getElementById('inputDlc1').value);
+  localStorage.setItem('ds2-dlc2', document.getElementById('inputDlc2').value);
+  localStorage.setItem('ds2-dlc3', document.getElementById('inputDlc3').value);
+  localStorage.setItem('ds2-baseReward', document.getElementById('inputBaseGameReward').value);
+}
+
+function loadFromLocalStorage() {
+  document.getElementById('updateLives').value = localStorage.getItem('ds2-lives') || 0;
+  document.getElementById('updateBosses').value = localStorage.getItem('ds2-bosses') || 0;
+  document.getElementById('updateDlcs').value = localStorage.getItem('ds2-dlcs') || 0;
+  document.getElementById('updateBaseGame').value = localStorage.getItem('ds2-baseGame') || 0;
+  document.getElementById('inputDlc1').value = localStorage.getItem('ds2-dlc1') || '';
+  document.getElementById('inputDlc2').value = localStorage.getItem('ds2-dlc2') || '';
+  document.getElementById('inputDlc3').value = localStorage.getItem('ds2-dlc3') || '';
+  document.getElementById('inputBaseGameReward').value = localStorage.getItem('ds2-baseReward') || '';
+}
+
+// Update + Save on every input change
+function updateOverlayAndSave() {
+  updateOverlay();      // your existing update logic
+  saveToLocalStorage(); // new save step
+}
+
+// Add input listeners
+document.getElementById('updateLives').addEventListener('input', updateOverlayAndSave);
+document.getElementById('updateBosses').addEventListener('input', updateOverlayAndSave);
+document.getElementById('updateDlcs').addEventListener('input', updateOverlayAndSave);
+document.getElementById('updateBaseGame').addEventListener('input', updateOverlayAndSave);
+document.getElementById('inputDlc1').addEventListener('input', updateOverlayAndSave);
+document.getElementById('inputDlc2').addEventListener('input', updateOverlayAndSave);
+document.getElementById('inputDlc3').addEventListener('input', updateOverlayAndSave);
+document.getElementById('inputBaseGameReward').addEventListener('input', updateOverlayAndSave);
+
+// Run when page loads
+loadFromLocalStorage();
+updateOverlay();
+
 </body>
 </html>
