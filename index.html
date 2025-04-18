@@ -219,41 +219,7 @@
   </div>
 
   <script>
-    document.getElementById('opacityRange').addEventListener('input', function () {
-      document.documentElement.style.setProperty('--bg-opacity', this.value);
-    });
-
-    function updateOverlay() {
-      const lives = document.getElementById('updateLives').value;
-      const bosses = document.getElementById('updateBosses').value;
-      const dlcs = document.getElementById('updateDlcs').value;
-      const baseGameCompletion = document.getElementById('updateBaseGame').value;
-
-      document.getElementById('lives').textContent = lives;
-      document.getElementById('bosses').textContent = bosses;
-      document.getElementById('dlcs').textContent = dlcs;
-
-      const gameStatus = (bosses >= 40) ? 'Base Game Completed' : 'Base Game Incomplete';
-      document.getElementById('gameStatus').textContent = gameStatus;
-
-      document.getElementById('dlcItem').textContent = document.getElementById('inputDlc1').value || '--';
-      document.getElementById('dlcRing').className = dlcs >= 2 ? 'unlocked' : 'locked';
-      document.getElementById('dlcWeapon').className = dlcs >= 3 ? 'unlocked' : 'locked';
-
-      document.getElementById('dlcRing').textContent = document.getElementById('inputDlc2').value || '--';
-      document.getElementById('dlcWeapon').textContent = document.getElementById('inputDlc3').value || '--';
-
-      document.getElementById('covenantReward').className = baseGameCompletion > 0 ? 'unlocked' : 'locked';
-      document.getElementById('covenantReward').textContent = document.getElementById('inputBaseGameReward').value || '--';
-    }
-
-    document.querySelectorAll('.control-panel input').forEach(input => {
-      input.addEventListener('input', updateOverlay);
-    });
-
-    updateOverlay();
-  </script>
-        function saveToLocalStorage() {
+    function saveToLocalStorage() {
   localStorage.setItem('ds2-lives', document.getElementById('updateLives').value);
   localStorage.setItem('ds2-bosses', document.getElementById('updateBosses').value);
   localStorage.setItem('ds2-dlcs', document.getElementById('updateDlcs').value);
@@ -294,6 +260,39 @@ document.getElementById('inputBaseGameReward').addEventListener('input', updateO
 // Run when page loads
 loadFromLocalStorage();
 updateOverlay();
+    document.getElementById('opacityRange').addEventListener('input', function () {
+      document.documentElement.style.setProperty('--bg-opacity', this.value);
+    });
 
+    function updateOverlay() {
+      const lives = document.getElementById('updateLives').value;
+      const bosses = document.getElementById('updateBosses').value;
+      const dlcs = document.getElementById('updateDlcs').value;
+      const baseGameCompletion = document.getElementById('updateBaseGame').value;
+
+      document.getElementById('lives').textContent = lives;
+      document.getElementById('bosses').textContent = bosses;
+      document.getElementById('dlcs').textContent = dlcs;
+
+      const gameStatus = (bosses >= 40) ? 'Base Game Completed' : 'Base Game Incomplete';
+      document.getElementById('gameStatus').textContent = gameStatus;
+
+      document.getElementById('dlcItem').textContent = document.getElementById('inputDlc1').value || '--';
+      document.getElementById('dlcRing').className = dlcs >= 2 ? 'unlocked' : 'locked';
+      document.getElementById('dlcWeapon').className = dlcs >= 3 ? 'unlocked' : 'locked';
+
+      document.getElementById('dlcRing').textContent = document.getElementById('inputDlc2').value || '--';
+      document.getElementById('dlcWeapon').textContent = document.getElementById('inputDlc3').value || '--';
+
+      document.getElementById('covenantReward').className = baseGameCompletion > 0 ? 'unlocked' : 'locked';
+      document.getElementById('covenantReward').textContent = document.getElementById('inputBaseGameReward').value || '--';
+    }
+
+    document.querySelectorAll('.control-panel input').forEach(input => {
+      input.addEventListener('input', updateOverlay);
+    });
+
+    updateOverlay();
+  </script>        
 </body>
 </html>
