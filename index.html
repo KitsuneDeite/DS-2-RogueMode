@@ -10,23 +10,24 @@
       --bg-opacity: 0.75;
     }
     body {
-      margin: 0;
-      font-family: 'Cinzel', serif;
-      background-color: rgba(0, 0, 0, 0);
-      color: #f0e6d2;
-      padding: 20px;
-      font-size: 16px;
-    }
-    .overlay {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-      background-color: rgba(20, 20, 20, var(--bg-opacity));
-      border: 2px solid #a38b61;
-      border-radius: 20px;
-      padding: 20px;
-      width: 800px;
-    }
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background-color: #0e0e0e; /* DARK BACKGROUND */
+  color: #f0e6d2;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.overlay {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  background-color: #1c1c1c; /* Solid dark background */
+  border: 2px solid #a38b61;
+  border-radius: 20px;
+  padding: 20px;
+  width: 800px;
+}
     .section {
       margin-bottom: 20px;
     }
@@ -241,6 +242,7 @@ function loadFromLocalStorage() {
   document.getElementById('inputBaseGameReward').value = localStorage.getItem('ds2-baseReward') || '';
 }
 
+
 // Update + Save on every input change
 function updateOverlayAndSave() {
   updateOverlay();      // your existing update logic
@@ -259,10 +261,12 @@ document.getElementById('inputBaseGameReward').addEventListener('input', updateO
 
 // Run when page loads
 loadFromLocalStorage();
-updateOverlay();
-    document.getElementById('opacityRange').addEventListener('input', function () {
-      document.documentElement.style.setProperty('--bg-opacity', this.value);
-    });
+updateOverlay(); // to visually reflect stored values
+    document.getElementById('updateButton').addEventListener('click', function () {
+  updateOverlay();
+  saveToLocalStorage(); // only save on button click
+});
+
 
     function updateOverlay() {
       const lives = document.getElementById('updateLives').value;
