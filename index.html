@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dark Souls 2 RogueMode Overlay</title>
   <style>
     :root {
@@ -104,6 +104,16 @@
     .control-panel button:hover {
       background-color: #6f4e37;
     }
+    #rotatingSection {
+      grid-column: 1 / -1;
+      margin-top: 20px;
+    }
+    .rotating-item {
+      background-color: rgba(30, 30, 30, 0.6);
+      padding: 15px;
+      border: 1px solid #a38b61;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
@@ -127,10 +137,7 @@
           <summary>1st DLC Reward</summary>
           <ul>
             <li>🏆 1 DLC: Perm Item (Chosen: <span id="dlcItem">--</span>)</li>
-            <li>
-              <label for="inputDlc1">Enter Item</label>
-              <input type="text" id="inputDlc1" placeholder="Enter item...">
-            </li>
+            <li><label for="inputDlc1">Enter Item</label><input type="text" id="inputDlc1" placeholder="Enter item..."></li>
           </ul>
         </details>
       </div>
@@ -140,10 +147,7 @@
           <summary>2nd DLC Reward</summary>
           <ul>
             <li>💍 2 DLCs: Perm Ring — <span id="dlcRing" class="locked">Locked</span></li>
-            <li>
-              <label for="inputDlc2">Enter Ring</label>
-              <input type="text" id="inputDlc2" placeholder="Enter ring...">
-            </li>
+            <li><label for="inputDlc2">Enter Ring</label><input type="text" id="inputDlc2" placeholder="Enter ring..."></li>
           </ul>
         </details>
       </div>
@@ -153,62 +157,57 @@
           <summary>3rd DLC Reward</summary>
           <ul>
             <li>⚔️ 3 DLCs: Perm Weapon — <span id="dlcWeapon" class="locked">Locked</span></li>
-            <li>
-              <label for="inputDlc3">Enter Weapon</label>
-              <input type="text" id="inputDlc3" placeholder="Enter weapon...">
-            </li>
+            <li><label for="inputDlc3">Enter Weapon</label><input type="text" id="inputDlc3" placeholder="Enter weapon..."></li>
           </ul>
         </details>
       </div>
+    </div>
 
-      <div class="section" id="rotatingSection">
-        <div id="rotate1">
-          <h2>Base Game Reward</h2>
-          <p>🏅 Covenant Item — <span id="covenantReward" class="locked">Locked</span></p>
-          <label for="inputBaseGameReward">Enter Covenant Item</label>
-          <input type="text" id="inputBaseGameReward" placeholder="Enter item...">
-        </div>
-        <div id="rotate2" style="display: none;">
-          <h2>Info</h2>
-          <p>Track your Dark Souls 2 RogueMode progress here!</p>
-          <p>Only updates when you click "Update Values".</p>
-        </div>
-        <div id="rotate3" style="display: none;">
-          <h2>Unlock Tracker</h2>
-          <ul>
-            <li>Boss Kill = 1 life</li>
-            <li>4 Boss Kills = perm blacksmith key</li>
-            <li>8 Boss Kills = perm soldier key</li>
-            <li>12 Boss Kills = perm 3x lives per start</li>
-            <li>16 Boss Kills = x3 summons</li>
-            <li>20 Boss Kills = perm lockstones</li>
-            <li>24 Boss kills = perm summons available</li>
-            <li>28 Boss Kills = perm branches</li>
-            <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
-            <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
-            <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
-            <li>Beat base game = 1 perm covenant item of choice</li>
-          </ul>
-        </div>
+    <!-- Rotating Section spans both columns -->
+    <div id="rotatingSection">
+      <div class="rotating-item" id="baseGameReward">
+        <h2>Base Game Reward</h2>
+        <p>🏅 Covenant Item — <span id="covenantReward" class="locked">Locked</span></p>
+        <label for="inputBaseGameReward">Enter Covenant Item</label>
+        <input type="text" id="inputBaseGameReward" placeholder="Enter item..."/>
+      </div>
+
+      <div class="rotating-item" id="rotatingInfo" style="display: none;">
+        <h2>Info</h2>
+        <p>Bosses grant 1 life each. Rewards unlock at key milestones.</p>
+        <p>DLC completions and base game status unlock permanent item use.</p>
+      </div>
+
+      <div class="rotating-item" id="unlockTrackerSection" style="display: none;">
+        <h2>Unlock Tracker</h2>
+        <ul>
+          <li>Boss Kill = 1 life</li>
+          <li>4 Boss Kills = perm blacksmith key</li>
+          <li>8 Boss Kills = perm soldier key</li>
+          <li>12 Boss Kills = perm 3x lives per start</li>
+          <li>16 Boss Kills = x3 summons</li>
+          <li>20 Boss Kills = perm lockstones</li>
+          <li>24 Boss kills = perm summons available</li>
+          <li>28 Boss Kills = perm branches</li>
+          <li>1 DLC complete = 1 perm item of choice (no covenant)</li>
+          <li>2 DLC complete = 1 perm ring of choice (no covenant)</li>
+          <li>3 DLC complete = 1 perm weapon of choice (no covenant)</li>
+          <li>Beat base game = 1 perm covenant item of choice</li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- Control Panel -->
   <div class="control-panel">
     <h3>Live Update Panel</h3>
     <label for="updateLives">Lives Remaining</label>
     <input type="number" id="updateLives" min="0">
-
     <label for="updateBosses">Bosses Defeated</label>
     <input type="number" id="updateBosses" min="0">
-
     <label for="updateDlcs">DLCs Completed</label>
     <input type="number" id="updateDlcs" min="0">
-
     <label for="updateBaseGame">Base Game Completion</label>
     <input type="number" id="updateBaseGame" min="0">
-
     <button id="updateButton">Update Values</button>
     <button id="resetButton" style="margin-top: 10px;">Reset All</button>
   </div>
@@ -255,7 +254,6 @@
 
     function loadFromLocalStorage() {
       const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
-      if (!data) return;
       document.getElementById('updateLives').value = data.lives || 0;
       document.getElementById('updateBosses').value = data.bosses || 0;
       document.getElementById('updateDlcs').value = data.dlcs || 0;
@@ -276,19 +274,24 @@
       location.reload();
     });
 
+    const rotatingItems = [
+      document.getElementById('baseGameReward'),
+      document.getElementById('rotatingInfo'),
+      document.getElementById('unlockTrackerSection')
+    ];
+    let currentIndex = 0;
+
+    function rotateContent() {
+      rotatingItems.forEach((item, index) => {
+        item.style.display = index === currentIndex ? 'block' : 'none';
+      });
+      currentIndex = (currentIndex + 1) % rotatingItems.length;
+    }
+
+    setInterval(rotateContent, 10000); // rotate every 10s
+
     loadFromLocalStorage();
     updateOverlay();
-
-    // Rotating logic for info panel
-    let rotateIndex = 0;
-    const rotateElements = ["rotate1", "rotate2", "rotate3"];
-
-    setInterval(() => {
-      rotateElements.forEach((id, i) => {
-        document.getElementById(id).style.display = i === rotateIndex ? 'block' : 'none';
-      });
-      rotateIndex = (rotateIndex + 1) % rotateElements.length;
-    }, 10000);
   </script>
 </body>
 </html>
