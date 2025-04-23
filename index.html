@@ -224,7 +224,7 @@
         </button>
         <div id="unlockTrackerDropdown" class="dropdown-content">
           <ul id="unlockTracker">
-            <li><input type="checkbox" id="unlock1" disabled> 2 Boss Kills = 1 life</li>
+            <li><input type="checkbox" id="unlock1"> 2 Boss Kills = 1 life</li>
             <li><input type="checkbox" id="unlock2"> 4 Boss Kills = perm blacksmith key</li>
             <li><input type="checkbox" id="unlock3"> 6 Boss Kills = 2 lives</li>
             <li><input type="checkbox" id="unlock4"> 8 Boss Kills = perm soldier key</li>
@@ -347,7 +347,7 @@
     
     function saveToLocalStorage() {
       const data = {
-        runs: document.getElementById('runs').textContent,
+        runs: document.getElementById('updateRuns').value,
         lives: document.getElementById('updateLives').value,
         bosses: document.getElementById('updateBosses').value,
         dlcs: document.getElementById('updateDlcs').value,
@@ -363,7 +363,7 @@
     function loadFromLocalStorage() {
       const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
       if (!data) return;
-      document.getElementById('runs').textContent = data.runs || 0;
+      document.getElementById('runs').value = data.runs || 0;
       document.getElementById('updateLives').value = data.lives || 0;
       document.getElementById('updateBosses').value = data.bosses || 0;
       document.getElementById('updateDlcs').value = data.dlcs || 0;
@@ -384,22 +384,7 @@
       location.reload();
     });
 
-    function updateRunCount() {
-  const runInput = document.getElementById('runInput').value;
-  document.getElementById('runCount').textContent = runInput;
-  localStorage.setItem('ds2RunCount', runInput);
-}
-
-function loadRunCount() {
-  const runCount = localStorage.getItem('ds2RunCount');
-  if (runCount !== null) {
-    document.getElementById('runCount').textContent = runCount;
-    document.getElementById('runInput').value = runCount;
-  }
-}
     loadFromLocalStorage();
-    loadUnlocksFromLocalStorage();
-    loadRunCount();
     updateOverlay();
     const messages = [
       // Overlay Tips, Facts, Challenges, and More
