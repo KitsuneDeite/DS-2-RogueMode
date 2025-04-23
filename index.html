@@ -149,7 +149,7 @@
     <div>
       <div class="section">
   <h2>Core Info</h2>
-  <p><strong>Runs Lost:</strong> <span id="Runs">0</span></p>
+  <p><strong>Runs Lost:</strong> <span id="runs">0</span></p>
   <p><strong>Lives Remaining:</strong> <span id="lives">0</span></p>
   <p><strong>Bosses Defeated:</strong> <span id="bosses">0</span> / 41</p>
   <p><strong>DLCs Completed:</strong> <span id="dlcs">0</span> / 3</p>
@@ -284,11 +284,13 @@
     });
 
     function updateOverlay() {
+      const runs = document.getElementById('updateRuns').value;
       const lives = document.getElementById('updateLives').value;
       const bosses = document.getElementById('updateBosses').value;
       const dlcs = document.getElementById('updateDlcs').value;
       const baseGameCompletion = document.getElementById('updateBaseGame').value;
 
+      document.getElementById('runs').textContent = runs;
       document.getElementById('lives').textContent = lives;
       document.getElementById('bosses').textContent = bosses;
       document.getElementById('dlcs').textContent = dlcs;
@@ -345,6 +347,7 @@
     
     function saveToLocalStorage() {
       const data = {
+        runs: document.getElementById('runs').textContent,
         lives: document.getElementById('updateLives').value,
         bosses: document.getElementById('updateBosses').value,
         dlcs: document.getElementById('updateDlcs').value,
@@ -360,6 +363,7 @@
     function loadFromLocalStorage() {
       const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
       if (!data) return;
+      document.getElementById('runs').textContent = data.runs || 0;
       document.getElementById('updateLives').value = data.lives || 0;
       document.getElementById('updateBosses').value = data.bosses || 0;
       document.getElementById('updateDlcs').value = data.dlcs || 0;
