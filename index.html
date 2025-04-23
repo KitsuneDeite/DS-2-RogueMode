@@ -148,12 +148,16 @@
   <div class="overlay">
     <div>
       <div class="section">
-        <h2>Core Info</h2>
-        <p><strong>Lives Remaining:</strong> <span id="lives">0</span></p>
-        <p><strong>Bosses Defeated:</strong> <span id="bosses">0</span> / 41</p>
-        <p><strong>DLCs Completed:</strong> <span id="dlcs">0</span> / 3</p>
-        <p><strong>Game Status:</strong> <span id="gameStatus">Base Game Incomplete</span></p>
-      </div>
+  <h2>Core Info</h2>
+  <p><strong>Runs Completed:</strong> <span id="runCount">0</span></p>
+  <label for="runInput">Update Runs</label>
+  <input type="number" id="runInput" min="0" placeholder="Enter run count">
+  <button onclick="updateRunCount()">Save Run Count</button>
+  <p><strong>Lives Remaining:</strong> <span id="lives">0</span></p>
+  <p><strong>Bosses Defeated:</strong> <span id="bosses">0</span> / 41</p>
+  <p><strong>DLCs Completed:</strong> <span id="dlcs">0</span> / 3</p>
+  <p><strong>Game Status:</strong> <span id="gameStatus">Base Game Incomplete</span></p>
+</div>
 
       <div class="section">
         <details open>
