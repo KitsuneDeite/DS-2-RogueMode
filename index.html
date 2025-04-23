@@ -383,19 +383,6 @@
       localStorage.clear();
       location.reload();
     });
-
-     function updateRunCount() {
-  const runInput = document.getElementById('runInput').value;
-  document.getElementById('runCount').textContent = runInput;
-  localStorage.setItem('ds2RunCount', runInput);
-}
-
-function loadRunCount() {
-  const runCount = localStorage.getItem('ds2RunCount');
-  if (runCount !== null) {
-    document.getElementById('runCount').textContent = runCount;
-    document.getElementById('runInput').value = runCount;
-  }
     
     loadFromLocalStorage();
     updateOverlay();
