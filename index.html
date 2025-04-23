@@ -346,33 +346,36 @@
     loadUnlocksFromLocalStorage();
     
     function saveToLocalStorage() {
-      const data = {
-        runs: document.getElementById('updateRuns').value,
-        lives: document.getElementById('updateLives').value,
-        bosses: document.getElementById('updateBosses').value,
-        dlcs: document.getElementById('updateDlcs').value,
-        baseGame: document.getElementById('updateBaseGame').value,
-        item1: document.getElementById('inputDlc1').value,
-        item2: document.getElementById('inputDlc2').value,
-        item3: document.getElementById('inputDlc3').value,
-        covenant: document.getElementById('inputBaseGameReward').value,
-      };
-      localStorage.setItem('ds2RogueData', JSON.stringify(data));
-    }
+    const data = {
+      runs: document.getElementById('updateRuns').value,
+      lives: document.getElementById('updateLives').value,
+      bosses: document.getElementById('updateBosses').value,
+      dlcs: document.getElementById('updateDlcs').value,
+      baseGame: document.getElementById('updateBaseGame').value,
+      item1: document.getElementById('inputDlc1').value,
+      item2: document.getElementById('inputDlc2').value,
+      item3: document.getElementById('inputDlc3').value,
+      covenant: document.getElementById('inputBaseGameReward').value,
+    };
+    localStorage.setItem('ds2RogueData', JSON.stringify(data));
+    // Optional: Update displayed run count immediately
+    document.getElementById('runs').textContent = data.runs;
+  }
 
-    function loadFromLocalStorage() {
-      const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
-      if (!data) return;
-      document.getElementById('runs').value = data.runs || 0;
-      document.getElementById('updateLives').value = data.lives || 0;
-      document.getElementById('updateBosses').value = data.bosses || 0;
-      document.getElementById('updateDlcs').value = data.dlcs || 0;
-      document.getElementById('updateBaseGame').value = data.baseGame || 0;
-      document.getElementById('inputDlc1').value = data.item1 || '';
-      document.getElementById('inputDlc2').value = data.item2 || '';
-      document.getElementById('inputDlc3').value = data.item3 || '';
-      document.getElementById('inputBaseGameReward').value = data.covenant || '';
-    }
+  function loadFromLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('ds2RogueData') || '{}');
+    if (!data) return;
+    document.getElementById('runs').textContent = data.runs || 0;
+    document.getElementById('updateRuns').value = data.runs || 0;
+    document.getElementById('updateLives').value = data.lives || 0;
+    document.getElementById('updateBosses').value = data.bosses || 0;
+    document.getElementById('updateDlcs').value = data.dlcs || 0;
+    document.getElementById('updateBaseGame').value = data.baseGame || 0;
+    document.getElementById('inputDlc1').value = data.item1 || '';
+    document.getElementById('inputDlc2').value = data.item2 || '';
+    document.getElementById('inputDlc3').value = data.item3 || '';
+    document.getElementById('inputBaseGameReward').value = data.covenant || '';
+  }
 
     document.getElementById('updateButton').addEventListener('click', function () {
       updateOverlay();
