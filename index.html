@@ -320,8 +320,12 @@
         unlock10: document.getElementById('unlock10').checked,
         unlock11: document.getElementById('unlock11').checked,
         unlock12: document.getElementById('unlock12').checked,
-        unlock12: document.getElementById('unlock13').checked,
-        unlock12: document.getElementById('unlock14').checked
+        unlock13: document.getElementById('unlock13').checked,
+        unlock14: document.getElementById('unlock14').checked,
+        unlock15: document.getElementById('unlock15').checked,
+        unlock16: document.getElementById('unlock16').checked,
+        unlock17: document.getElementById('unlock17').checked,
+        unlock18: document.getElementById('unlock18').checked
         };
         localStorage.setItem('ds2RogueUnlocks', JSON.stringify(unlocks));
     }
@@ -343,6 +347,10 @@
         document.getElementById('unlock12').checked = unlocks.unlock12 || false;
         document.getElementById('unlock13').checked = unlocks.unlock13 || false;
         document.getElementById('unlock14').checked = unlocks.unlock14 || false;
+        document.getElementById('unlock15').checked = unlocks.unlock15 || false;
+        document.getElementById('unlock16').checked = unlocks.unlock16 || false;
+        document.getElementById('unlock17').checked = unlocks.unlock17 || false;
+        document.getElementById('unlock18').checked = unlocks.unlock18 || false;
       }
     }
 
